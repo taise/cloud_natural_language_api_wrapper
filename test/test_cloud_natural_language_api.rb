@@ -37,13 +37,13 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
   end
 
   def test_analyze_entity
-    res = @cnl_api.analyze_entity(CONTENT_JA)
+    res = @cnl_api.analyze_entity(CONTENT_EN)
     actual = JSON.parse(res.body)
     assert_equal('200', res.code)
     assert_equal('OK', res.message)
     assert(actual.has_key?('entities'))
     assert(actual.has_key?('language'))
-    assert_equal('ja', actual['language'])
+    assert_equal('en', actual['language'])
   end
 
   def test_build_uri

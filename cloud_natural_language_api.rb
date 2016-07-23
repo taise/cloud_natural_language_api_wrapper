@@ -13,7 +13,7 @@ class CloudNaturalLanguageAPI
     self.api_key = api_key
   end
 
-  def analyze_entity(content, lang = 'ja')
+  def analyze_entity(content, lang = 'EN')
     uri = build_uri(ANALYZE_ENTITIES_PATH)
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
