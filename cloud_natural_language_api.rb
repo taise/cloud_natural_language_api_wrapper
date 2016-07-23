@@ -14,7 +14,6 @@ class CloudNaturalLanguageAPI
 
   def analyze_entity(content, lang = 'ja')
     path = '/v1beta1/documents:analyzeEntities'
-    query = 'key=' + api_key
     uri = URI::HTTPS.build(host: HOST, path: path, port: PORT, query: query)
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
@@ -26,6 +25,10 @@ class CloudNaturalLanguageAPI
   end
 
   private
+
+  def query
+    "key=#{api_key}"
+  end
 
   def body(content, lang)
     {

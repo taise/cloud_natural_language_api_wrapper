@@ -46,6 +46,10 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal('ja', actual['language'])
   end
 
+  def query
+    assert_equal("key=#{API_KEY}", @cnl_api.send(:query))
+  end
+
   def test_body_en
     actual = JSON.parse(@cnl_api.send(:body, CONTENT_EN, 'EN'))
     expect = {
