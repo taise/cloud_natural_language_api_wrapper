@@ -1,9 +1,12 @@
 # frozen_string_literal: true
+require 'json'
 require 'test/unit'
 require_relative '../cloud_natural_language_api'
 
 class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
   API_KEY = ENV['API_KEY']
+  CONTENT_EN = 'Hello Google Cloud Natural Language API!'
+  CONTENT_JA = 'こんにちは グーグル Cloud Natural Language API!'
 
   def self.startup
     if API_KEY.nil?
@@ -31,5 +34,41 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
 
   def test_PORT
     assert_equal(443, CloudNaturalLanguageAPI::PORT)
+  end
+
+  def test_analyze_entity
+    res = @cnl_api.analyze_entity(CONTENT_JA)
+    actual = JSON.parse(res.body)
+    assert_equal('200', res.code)
+    assert_equal('OK', res.message)
+    assert(actual.has_key?('entities'))
+    assert(actual.has_key?('language'))
+    assert_equal('ja', actual['language'])
+  end
+
+  def test_body_en
+    actual = JSON.parse(@cnl_api.send(:body, CONTENT_EN, 'EN'))
+    expect = {
+      'document' => {
+        'type' => 'PLAIN_TEXT',
+        'language' => 'EN',
+        'content' => CONTENT_EN
+      },
+      'encodingType' => 'UTF8'
+    }
+    assert_equal(expect, actual)
+  end
+
+  def test_body_ja
+    actual = JSON.parse(@cnl_api.send(:body, CONTENT_JA, 'ja'))
+    expect = {
+      'document' => {
+        'type' => 'PLAIN_TEXT',
+        'language' => 'ja',
+        'content' => CONTENT_JA
+      },
+      'encodingType' => 'UTF8'
+    }
+    assert_equal(expect, actual)
   end
 end
