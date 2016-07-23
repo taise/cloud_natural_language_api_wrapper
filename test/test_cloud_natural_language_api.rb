@@ -46,7 +46,14 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal('ja', actual['language'])
   end
 
-  def query
+  def test_build_uri
+    expect = 'https://language.googleapis.com/awesome_path?key='+ API_KEY
+    actual = @cnl_api.send(:build_uri, '/awesome_path')
+    assert(actual.instance_of?(URI::HTTPS))
+    assert(expect, actual.to_s)
+  end
+
+  def test_query
     assert_equal("key=#{API_KEY}", @cnl_api.send(:query))
   end
 
