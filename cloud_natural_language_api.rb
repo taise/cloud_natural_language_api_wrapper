@@ -2,6 +2,7 @@
 
 class CloudNaturalLanguageAPI
   HOST = 'language.googleapis.com'
+  PORT = 443
 
   attr_accessor :api_key
   def initialize(api_key)
