@@ -1,3 +1,3 @@
-class CloudNaturalLanguageAPI
+module CloudNaturalLanguageAPI
   VERSION = "0.1.0"
 end
