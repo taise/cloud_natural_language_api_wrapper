@@ -7,6 +7,8 @@ CONTENT = <<-'EOF'
 うつくしい森で飾られたモリーオ市、
 郊外のぎらぎらひかる草の波。
 EOF
+# 引用元: ポラーノの広場 / 宮沢 賢治
+# http://www.aozora.gr.jp/cards/000081/files/1935_19925.html
 
 cnl = CloudNaturalLanguageAPI.new(ENV['API_KEY'])
 puts cnl.analyze_entities(CONTENT, 'ja')
