@@ -9,6 +9,7 @@ class CloudNaturalLanguageAPI
   API_BASE_PATH = '/v1beta1/documents:'
   ANALYZE_ENTITIES_PATH  = API_BASE_PATH + 'analyzeEntities'
   ANALYZE_SENTIMENT_PATH = API_BASE_PATH + 'analyzeSentiment'
+  ANNOTATE_TEXT_PATH     = API_BASE_PATH + 'annotateText'
 
   attr_accessor :api_key
   def initialize(api_key)
@@ -36,6 +37,15 @@ class CloudNaturalLanguageAPI
     post(uri, document(content, lang).to_json).body
   end
 
+  def annotate_text(content, lang = 'EN', opts = {})
+    uri = build_uri(ANNOTATE_TEXT_PATH)
+    body = document(content, lang)
+      .merge(features(opts))
+      .merge(encodingType: 'UTF8')
+      .to_json
+    post(uri, body).body
+  end
+
   private
 
   def build_uri(path)
@@ -61,7 +71,7 @@ class CloudNaturalLanguageAPI
     }
   end
 
-  def features(syntax: false, entities: false, sentiment: false)
+  def features(syntax: true, entities: false, sentiment: false)
     {
       features: {
         extractSyntax: syntax,

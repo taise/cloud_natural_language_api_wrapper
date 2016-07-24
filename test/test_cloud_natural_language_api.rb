@@ -58,6 +58,38 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal('en', actual['language'])
   end
 
+  def test_annotate_text_default
+    res = @cnl_api.annotate_text(CONTENT_EN)
+    actual = JSON.parse(res)
+
+    assert(actual.has_key?('sentences'))
+    assert(actual.has_key?('tokens'))
+    assert(actual.has_key?('entities'))
+    assert(actual['entities'].empty?)
+    assert_equal(false, actual.has_key?('documentSentiment'))
+    assert(actual.has_key?('language'))
+    assert_equal('en', actual['language'])
+  end
+
+  def test_annotate_text_all
+    opts = {
+      syntax: true,
+      entities: true,
+      sentiment: true
+    }
+    res = @cnl_api.annotate_text(CONTENT_EN, 'en', opts)
+    actual = JSON.parse(res)
+
+    assert(actual.has_key?('sentences'))
+    assert(actual.has_key?('tokens'))
+    assert(actual.has_key?('entities'))
+    assert(not actual['entities'].empty?)
+    assert(actual.has_key?('documentSentiment'))
+    assert(not actual['documentSentiment'].empty?)
+    assert(actual.has_key?('language'))
+    assert_equal('en', actual['language'])
+  end
+
   # test private methods
 
   def test_build_uri
@@ -99,7 +131,7 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     actual = @cnl_api.send(:features)
     expect = {
       features: {
-        extractSyntax: false,
+        extractSyntax: true,
         extractEntities: false,
         extractDocumentSentiment: false
       }
