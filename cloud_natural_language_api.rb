@@ -6,7 +6,9 @@ require 'net/http'
 class CloudNaturalLanguageAPI
   HOST = 'language.googleapis.com'
   PORT = 443
-  ANALYZE_ENTITIES_PATH = '/v1beta1/documents:analyzeEntities'
+  API_BASE_PATH = '/v1beta1/documents:'
+  ANALYZE_ENTITIES_PATH  = API_BASE_PATH + 'analyzeEntities'
+  ANALYZE_SENTIMENT_PATH = API_BASE_PATH + 'analyzeSentiment'
 
   attr_accessor :api_key
   def initialize(api_key)
@@ -25,7 +27,13 @@ class CloudNaturalLanguageAPI
 
   def analyze_entities(content, lang = 'EN')
     uri = build_uri(ANALYZE_ENTITIES_PATH)
-    post(uri, body(content, lang)).body
+    body = document(content, lang).merge(encodingType: 'UTF8').to_json
+    post(uri, body).body
+  end
+
+  def analyze_sentiment(content, lang = 'EN')
+    uri = build_uri(ANALYZE_SENTIMENT_PATH)
+    post(uri, document(content, lang).to_json).body
   end
 
   private
@@ -43,14 +51,13 @@ class CloudNaturalLanguageAPI
     "key=#{api_key}"
   end
 
-  def body(content, lang)
+  def document(content, lang)
     {
       document: {
         type: 'PLAIN_TEXT',
         language: lang,
         content: content
-      },
-      encodingType: 'UTF8'
-    }.to_json
+      }
+    }
   end
 end

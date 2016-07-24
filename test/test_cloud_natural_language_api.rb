@@ -50,6 +50,14 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal('en', actual['language'])
   end
 
+  def test_analyze_sentiment
+    res = @cnl_api.analyze_sentiment(CONTENT_EN)
+    actual = JSON.parse(res)
+    assert(actual.has_key?('documentSentiment'))
+    assert(actual.has_key?('language'))
+    assert_equal('en', actual['language'])
+  end
+
   def test_build_uri
     expect = 'https://language.googleapis.com/awesome_path?key='+ API_KEY
     actual = @cnl_api.send(:build_uri, '/awesome_path')
@@ -61,28 +69,26 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal("key=#{API_KEY}", @cnl_api.send(:query))
   end
 
-  def test_body_en
-    actual = JSON.parse(@cnl_api.send(:body, CONTENT_EN, 'EN'))
+  def test_document_en
+    actual = @cnl_api.send(:document, CONTENT_EN, 'EN')
     expect = {
-      'document' => {
-        'type' => 'PLAIN_TEXT',
-        'language' => 'EN',
-        'content' => CONTENT_EN
-      },
-      'encodingType' => 'UTF8'
+      document: {
+        type: 'PLAIN_TEXT',
+        language: 'EN',
+        content: CONTENT_EN
+      }
     }
     assert_equal(expect, actual)
   end
 
-  def test_body_ja
-    actual = JSON.parse(@cnl_api.send(:body, CONTENT_JA, 'ja'))
+  def test_document_ja
+    actual = @cnl_api.send(:document, CONTENT_JA, 'ja')
     expect = {
-      'document' => {
-        'type' => 'PLAIN_TEXT',
-        'language' => 'ja',
-        'content' => CONTENT_JA
-      },
-      'encodingType' => 'UTF8'
+      document: {
+        type: 'PLAIN_TEXT',
+        language: 'ja',
+        content: CONTENT_JA
+      }
     }
     assert_equal(expect, actual)
   end
