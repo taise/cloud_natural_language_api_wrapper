@@ -58,6 +58,8 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal('en', actual['language'])
   end
 
+  # test private methods
+
   def test_build_uri
     expect = 'https://language.googleapis.com/awesome_path?key='+ API_KEY
     actual = @cnl_api.send(:build_uri, '/awesome_path')
@@ -96,9 +98,11 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
   def test_features_default
     actual = @cnl_api.send(:features)
     expect = {
-      extractSyntax: false,
-      extractEntities: false,
-      extractDocumentSentiment: false
+      features: {
+        extractSyntax: false,
+        extractEntities: false,
+        extractDocumentSentiment: false
+      }
     }
     assert_equal(expect, actual)
   end
@@ -111,9 +115,11 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
       sentiment: true
     )
     expect = {
-      extractSyntax: true,
-      extractEntities: true,
-      extractDocumentSentiment:true
+      features: {
+        extractSyntax: true,
+        extractEntities: true,
+        extractDocumentSentiment: true
+      }
     }
     assert_equal(expect, actual)
   end
