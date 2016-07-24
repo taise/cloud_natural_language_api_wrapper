@@ -36,6 +36,12 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert_equal(443, CloudNaturalLanguageAPI::PORT)
   end
 
+  def test_post
+    uri = URI.parse('https://httpbin.org/post')
+    body = { content: 'test'}.to_json
+    assert_equal('200', @cnl_api.post(uri, body).code)
+  end
+
   def test_analyze_entities
     res = @cnl_api.analyze_entities(CONTENT_EN)
     actual = JSON.parse(res.body)
