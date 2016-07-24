@@ -1,10 +1,6 @@
 # cloud_natural_language_api_wrapper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cloud_natural_language`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-## Requirements
-
-- Ruby 2.3
+This is a Google Cloud Natural Language API wrapper gem (unofficial).
 
 ## Installation
 
@@ -37,7 +33,10 @@ require 'cloud_natural_language'
 
 API_KEY = 'Set your Cloud Natural Language API key'
 api = CloudNaturalLanguage::API.new(API_KEY)
-puts api.analyze_entity('Hello Google Cloud Neural Language API.')
+
+puts api.analyze_entities('Hello Google Cloud Neural Language API.')
+puts api.analyze_sentiment('Hello Google Cloud Neural Language API.')
+puts api.annotate_text('Hello Google Cloud Neural Language API.')
 ```
 
 ## Development
