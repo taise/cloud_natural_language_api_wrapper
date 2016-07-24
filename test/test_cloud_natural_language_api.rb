@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'json'
 require 'test/unit'
-require_relative '../cloud_natural_language_api'
+require_relative '../lib/cloud_natural_language_api'
 
 class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
   API_KEY = ENV['API_KEY']
@@ -83,9 +83,9 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     assert(actual.has_key?('sentences'))
     assert(actual.has_key?('tokens'))
     assert(actual.has_key?('entities'))
-    assert(not actual['entities'].empty?)
+    assert_equal(false, actual['entities'].empty?)
     assert(actual.has_key?('documentSentiment'))
-    assert(not actual['documentSentiment'].empty?)
+    assert_equal(false, actual['documentSentiment'].empty?)
     assert(actual.has_key?('language'))
     assert_equal('en', actual['language'])
   end

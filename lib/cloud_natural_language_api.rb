@@ -3,6 +3,8 @@ require 'json'
 require 'uri'
 require 'net/http'
 
+require_relative 'cloud_natural_language_api/version'
+
 class CloudNaturalLanguageAPI
   HOST = 'language.googleapis.com'
   PORT = 443

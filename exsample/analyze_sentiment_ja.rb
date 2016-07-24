@@ -1,4 +1,4 @@
-require_relative '../cloud_natural_language_api'
+require_relative '../lib/cloud_natural_language_api'
 
 
 CONTENT = <<-'EOF'
