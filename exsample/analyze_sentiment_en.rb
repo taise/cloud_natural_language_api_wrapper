@@ -1,4 +1,4 @@
-require_relative '../lib/cloud_natural_language_api'
+require_relative '../lib/cloud_natural_language'
 
 
 CONTENT = <<-'EOF'
@@ -10,7 +10,7 @@ EOF
 # from: Alice's Adventures in Wonderland / Lewis Carroll
 # http://www.gutenberg.org/files/11/11-h/11-h.htm
 
-cnl = CloudNaturalLanguageAPI.new(ENV['API_KEY'])
+cnl = CloudNaturalLanguage::API.new(ENV['API_KEY'])
 puts cnl.analyze_sentiment(CONTENT)
 
 =begin

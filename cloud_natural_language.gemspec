@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cloud_natural_language_api/version'
+require 'cloud_natural_language/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "cloud_natural_language_api"
-  spec.version       = CloudNaturalLanguageApi::VERSION
+  spec.name          = "cloud_natural_language"
+  spec.version       = CloudNaturalLanguage::VERSION
   spec.authors       = ["taise"]
   spec.email         = ["taise515@gmail.com"]
 

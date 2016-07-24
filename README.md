@@ -11,8 +11,8 @@ Please, check [the offical document](https://cloud.google.com/natural-language/d
 
 ```ruby
 API_KEY = 'Set your Cloud Natural Language API key'
-cloud_neural_language_api = CloudNaturalLanguageAPI.new(API_KEY)
-puts cloud_neural_language_api.analyze_entity('Hello Google Cloud Neural Language API.')
+api = CloudNaturalLanguage::API.new(API_KEY)
+puts api.analyze_entity('Hello Google Cloud Neural Language API.')
 ```
 
 ## Next Features

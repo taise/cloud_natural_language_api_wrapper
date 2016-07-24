@@ -1,4 +1,4 @@
-require_relative '../lib/cloud_natural_language_api'
+require_relative '../lib/cloud_natural_language'
 
 
 CONTENT = <<-'EOF'
@@ -10,7 +10,7 @@ EOF
 # 引用元: ポラーノの広場 / 宮沢 賢治
 # http://www.aozora.gr.jp/cards/000081/files/1935_19925.html
 
-cnl = CloudNaturalLanguageAPI.new(ENV['API_KEY'])
+cnl = CloudNaturalLanguage::API.new(ENV['API_KEY'])
 puts cnl.analyze_sentiment(CONTENT, 'ja')
 
 ### 日本語利用時の注意点
