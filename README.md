@@ -19,3 +19,7 @@ puts cloud_neural_language_api.analyze_entity('Hello Google Cloud Neural Languag
 
 - callable analyzeSentiment api
 - callable annotateText api
+
+## License
+
+MIT License
