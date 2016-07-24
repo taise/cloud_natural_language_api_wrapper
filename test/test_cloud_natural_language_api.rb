@@ -44,9 +44,7 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
 
   def test_analyze_entities
     res = @cnl_api.analyze_entities(CONTENT_EN)
-    actual = JSON.parse(res.body)
-    assert_equal('200', res.code)
-    assert_equal('OK', res.message)
+    actual = JSON.parse(res)
     assert(actual.has_key?('entities'))
     assert(actual.has_key?('language'))
     assert_equal('en', actual['language'])

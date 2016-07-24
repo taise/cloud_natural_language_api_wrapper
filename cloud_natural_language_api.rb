@@ -25,7 +25,7 @@ class CloudNaturalLanguageAPI
 
   def analyze_entities(content, lang = 'EN')
     uri = build_uri(ANALYZE_ENTITIES_PATH)
-    post(uri, body(content, lang))
+    post(uri, body(content, lang)).body
   end
 
   private
