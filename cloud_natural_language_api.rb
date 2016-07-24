@@ -60,4 +60,12 @@ class CloudNaturalLanguageAPI
       }
     }
   end
+
+  def features(syntax: false, entities: false, sentiment: false)
+    {
+      extractSyntax: syntax,
+      extractEntities: entities,
+      extractDocumentSentiment:sentiment
+    }
+  end
 end

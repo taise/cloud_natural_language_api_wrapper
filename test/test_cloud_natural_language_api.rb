@@ -92,4 +92,29 @@ class TestCloudNaturalLanguageAPI < Test::Unit::TestCase
     }
     assert_equal(expect, actual)
   end
+
+  def test_features_default
+    actual = @cnl_api.send(:features)
+    expect = {
+      extractSyntax: false,
+      extractEntities: false,
+      extractDocumentSentiment: false
+    }
+    assert_equal(expect, actual)
+  end
+
+  def test_features_all_true
+    actual = @cnl_api.send(
+      :features,
+      syntax: true,
+      entities: true,
+      sentiment: true
+    )
+    expect = {
+      extractSyntax: true,
+      extractEntities: true,
+      extractDocumentSentiment:true
+    }
+    assert_equal(expect, actual)
+  end
 end
