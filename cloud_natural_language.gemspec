@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Google Cloud Natural Language API wrapper}
   spec.description   = %q{Google Cloud Natural Language API wrapper}
-  spec.homepage      = "https://github.com/taise/CloudNaturalLanguageAPIWrapper"
+  spec.homepage      = "https://github.com/taise/cloud_natural_language_api_wrapper"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
