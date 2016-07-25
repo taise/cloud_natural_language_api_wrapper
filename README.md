@@ -24,7 +24,7 @@ $ gem install cloud_natural_language
 
 ## Usage
 
-Get your Cloud Natural Language API on Google Cloud Platform Console at first.  
+Get your access key for Cloud Natural Language API on Google Cloud Platform Console at first.  
 Please, check [the offical document](https://cloud.google.com/natural-language/docs/getting-started).
 
 ```ruby
